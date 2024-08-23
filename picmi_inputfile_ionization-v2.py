@@ -8,7 +8,6 @@ License: GPLv3+
 from picongpu import picmi
 from picongpu import pypicongpu
 import numpy as np
-import scipy.constants as constants
 
 """
 @file PICMI user script reproducing the PIConGPU LWFA example
@@ -118,7 +117,7 @@ sim = picmi.Simulation(
     time_step_size=1.39e-16,
     picongpu_moving_window_move_point=0.9,
     picongpu_interaction=interaction,
-    picongpu_template_dir="/home/afshar87/afshari/simulation/picInputs/testPICMI/customTemplates"
+    picongpu_template_dir="./customTemplates"
     ) 
 
 for species, layout in species_list:
@@ -140,8 +139,8 @@ if ADD_CUSTOM_INPUT:
     output_configuration.addToCustomInput(
         {
             "png_plugin_SCALE_IMAGE": 1.0,
-            "png_plugin_SCALE_TO_CELLSIZE": "true", # e1 True, Python boolean values (True and False) should  match their corresponding C++ values (true and false),
-            "png_plugin_WHITE_BOX_PER_GPU": "false", # e2 False,
+            "png_plugin_SCALE_TO_CELLSIZE": "true",
+            "png_plugin_WHITE_BOX_PER_GPU": "false",
             "png_plugin_EM_FIELD_SCALE_CHANNEL1": 7,
             "png_plugin_EM_FIELD_SCALE_CHANNEL2": -1,
             "png_plugin_EM_FIELD_SCALE_CHANNEL3": -1,

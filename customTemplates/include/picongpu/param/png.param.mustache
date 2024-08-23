@@ -63,6 +63,7 @@ namespace picongpu
         constexpr float_X preChannel2_opacity = {{{png_plugin_PRE_CHANNEL2_OPACITY}}};
         constexpr float_X preChannel3_opacity = {{{png_plugin_PRE_CHANNEL3_OPACITY}}};
 
+        // test custom user input
 
         // specify color scales for each channel
         namespace preParticleDensCol = {{{png_plugin_preParticleDensCol}}};
@@ -70,7 +71,7 @@ namespace picongpu
         namespace preChannel2Col = {{{png_plugin_preChannel2_colorScale}}};
         namespace preChannel3Col = {{{png_plugin_preChannel3_colorScale}}};    
 
-            DINLINE float_X preChannel1(const float3_X& field_B, const float3_X& field_E, const float3_X& field_J)
+        DINLINE float_X preChannel1(const float3_X& field_B, const float3_X& field_E, const float3_X& field_J)
         {
             return   {{{png_plugin_preChannel1}}};
         }
@@ -81,7 +82,7 @@ namespace picongpu
         }
 
         DINLINE float_X preChannel3(const float3_X& field_B, const float3_X& field_E, const float3_X& field_J) 
-       {
+        {
             return {{{png_plugin_preChannel3}}};
         }
 
