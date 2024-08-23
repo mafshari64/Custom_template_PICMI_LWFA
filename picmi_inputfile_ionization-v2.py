@@ -135,12 +135,6 @@ if ADD_CUSTOM_INPUT:
     min_weight_input = pypicongpu.customuserinput.CustomUserInput() # particle.param.mustache
     min_weight_input.addToCustomInput({"minimum_weight": 10.0}, "minimum_weight")
     sim.picongpu_add_custom_user_input(min_weight_input)
-    
-    speed_of_light = constants.c  #  (m/s)
-    normalization_value = 5.0e12 / speed_of_light
-    # Precompute the values to pass to the C++ template
-    custom_normalization_si_values = "{{{:.15e}, 5.0e12, 15.0}}".format(normalization_value)
-    # print(custom_normalization_si_values)
 
     output_configuration = pypicongpu.customuserinput.CustomUserInput()
     output_configuration.addToCustomInput(
@@ -151,7 +145,7 @@ if ADD_CUSTOM_INPUT:
             "png_plugin_EM_FIELD_SCALE_CHANNEL1": 7,
             "png_plugin_EM_FIELD_SCALE_CHANNEL2": -1,
             "png_plugin_EM_FIELD_SCALE_CHANNEL3": -1,
-            "png_plugin_CUSTOM_NORMALIZATION_SI": custom_normalization_si_values,  # "{5.0e12 / speed_of_light, 5.0e12, 15.0}", # e3 "5.0e12 / speed_of_light, 5.0e12, 15.0". to generate a valid C++ array initialization, one needs to pass the entire list as a single string formatted like a C++ array.
+            "png_plugin_CUSTOM_NORMALIZATION_SI": "{5.0e12 / SI::SPEED_OF_LIGHT_SI, 5.0e12, 15.0}",
             "png_plugin_PRE_PARTICLE_DENS_OPACITY": 0.25,
             "png_plugin_PRE_CHANNEL1_OPACITY": 1.0,
             "png_plugin_PRE_CHANNEL2_OPACITY": 1.0,
