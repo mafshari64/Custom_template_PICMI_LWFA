@@ -183,8 +183,8 @@ if ADD_CUSTOM_INPUT:
             "phase_space_period": 100,
             "phase_space_space": "y",
             "phase_space_momentum": "py",
-            "phase_space_min": -1.0,
-            "phase_space_max": 1.0,
+            "phase_space_min": "-1.0",
+            "phase_space_max": "1.0",
             "phase_space_filter": "all",
         },
         "phase space plugin configuration"
