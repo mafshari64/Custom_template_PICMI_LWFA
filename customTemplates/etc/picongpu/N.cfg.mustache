@@ -90,66 +90,60 @@ fi
 pypicongpu_output_with_newlines="
   {{#customuserinput}}
 
-        --{{{customuserinput.png_plugin_species_name}}}_png.period {{{customuserinput.png_plugin_period}}}\
-        --{{{customuserinput.png_plugin_species_name}}}_png.axis {{{customuserinput.png_plugin_axis}}}\
-        --{{{customuserinput.png_plugin_species_name}}}_png.slicePoint {{{customuserinput.png_plugin_slicePoint}}}\
-        --{{{customuserinput.png_plugin_species_name}}}_png.folder {{{customuserinput.png_plugin_folder_name}}}  
+        --{{{customuserinput.png_plugin_species_name}}}_png.period {{{customuserinput.png_plugin_period}}}
+        --{{{customuserinput.png_plugin_species_name}}}_png.axis {{{customuserinput.png_plugin_axis}}}
+        --{{{customuserinput.png_plugin_species_name}}}_png.slicePoint {{{customuserinput.png_plugin_slicePoint}}}
+        --{{{customuserinput.png_plugin_species_name}}}_png.folder {{{customuserinput.png_plugin_folder_name}}}
 
-        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.period {{{customuserinput.energy_histogram_period}}} \
-        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.binCount {{{customuserinput.energy_histogram_bin_count}}} \
-        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.minEnergy {{{customuserinput.energy_histogram_min_energy}}} \
-        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.maxEnergy {{{customuserinput.energy_histogram_max_energy}}} \
-        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.filter {{{customuserinput.energy_histogram_filter}}  
+        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.period {{{customuserinput.energy_histogram_period}}}
+        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.binCount {{{customuserinput.energy_histogram_bin_count}}}
+        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.minEnergy {{{customuserinput.energy_histogram_min_energy}}}
+        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.maxEnergy {{{customuserinput.energy_histogram_max_energy}}}
+        --{{{customuserinput.energy_histogram_species_name}}}_energyHistogram.filter {{{customuserinput.energy_histogram_filter}}}
 
-         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.period {{{customuserinput.phase_space_period}}}        
-         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.space {{{customuserinput.phase_space_space}}}   
-         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.momentum {{{customuserinput.phase_space_momentum}}} \
-         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.min {{{customuserinput.phase_space_min}}}\
-         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.max {{{customuserinput.phase_space_max}}}   \
-         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.filter {{{customuserinput.phase_space_filter}}}  
+         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.period {{{customuserinput.phase_space_period}}}
+         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.space {{{customuserinput.phase_space_space}}}
+         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.momentum {{{customuserinput.phase_space_momentum}}}
+         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.min {{{customuserinput.phase_space_min}}}
+         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.max {{{customuserinput.phase_space_max}}}
+         --{{{customuserinput.phase_space_species_name}}}_phaseSpace.filter {{{customuserinput.phase_space_filter}}}
 
-        --openPMD.period {{{customuserinput.opnePMD_period}}}     
-        --openPMD.file {{{customuserinput.opnePMD_file}}}   
-        --openPMD.ext {{{customuserinput.opnePMD_extension}}  
+        --openPMD.period {{{customuserinput.openPMD_period}}}
+        --openPMD.file {{{customuserinput.openPMD_file}}}
+        --openPMD.ext {{{customuserinput.openPMD_extension}}}
 
         --checkpoint.backend {{{customuserinput.checkpoint_backend}}}
-        --checkpoint.period {{{customuserinput.checkpoint_period}}}\
-        --checkpoint.restart.backend {{{customuserinput.checkpoint_restart_backend}}}  
+        --checkpoint.period {{{customuserinput.checkpoint_period}}}
+        --checkpoint.restart.backend {{{customuserinput.checkpoint_restart_backend}}}
 
         --{{{customuserinput.macro_particle_count_species_name}}}_macroParticlesCount.period {{{customuserinput.macro_particle_count_period}}}
   {{/customuserinput}}
   {{^customuserinput}}
       {{#output.auto}}
-          --e_png.period 100  \
-          --e_png.axis yx \
-          --e_png.slicePoint 0.5 \
-          --e_png.folder pngElectronsYX
+        --fields_energy.period {{{period}}}
+        --sumcurr.period {{{period}}}
+        $USED_CHARGE_CONSERVATION_FLAGS
 
-          # energy histogram (electrons, [keV])
-          --e_energyHistogram.period 100    \
-          --e_energyHistogram.binCount 1024 \
-          --e_energyHistogram.minEnergy 0 \
-          --e_energyHistogram.maxEnergy 1000 \
-          --e_energyHistogram.filter all
+        {{#species_initmanager.species}}
+            --{{{name}}}_macroParticlesCount.period {{{period}}}
 
-          # longitudinal phase space (electrons, [m_e c])
-          --e_phaseSpace.period 100  \
-          --e_phaseSpace.space y \
-          --e_phaseSpace.momentum py \
-          --e_phaseSpace.min -1.0 \
-          --e_phaseSpace.max 1.0    \
-          --e_phaseSpace.filter all
+            --{{{name}}}_energy.period {{{period}}}
+            --{{{name}}}_energy.filter all
 
-          --openPMD.period 100   \
-          --openPMD.file simData \
-          --openPMD.ext bp \
+            --{{{name}}}_energyHistogram.period {{{period}}}
+            --{{{name}}}_energyHistogram.filter all
+            --{{{name}}}_energyHistogram.binCount 1024
+            --{{{name}}}_energyHistogram.minEnergy 0
+            --{{{name}}}_energyHistogram.maxEnergy 256000
 
-          --checkpoint.backend openPMD \
-          --checkpoint.period 100
-          --checkpoint.restart.backend openPMD
+            {{#png_axis}}
+                --{{{name}}}_png.period {{{period}}}
+                --{{{name}}}_png.axis {{{axis}}}
+                --{{{name}}}_png.slicePoint 0.5
+                --{{{name}}}_png.folder png_{{{name}}}_{{{axis}}}
+            {{/png_axis}}
+        {{/species_initmanager.species}}
 
-          # macro particle counter (electrons, debug information for memory)
-          --e_macroParticlesCount.period 100
       {{/output.auto}}
     {{/customuserinput}}
   "

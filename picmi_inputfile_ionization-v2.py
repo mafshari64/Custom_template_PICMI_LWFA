@@ -183,15 +183,15 @@ if ADD_CUSTOM_INPUT:
             "phase_space_period": 100,
             "phase_space_space": "y",
             "phase_space_momentum": "py",
-            "phase_space_min": "-1.0",
-            "phase_space_max": "1.0",
+            "phase_space_min": -1.0,
+            "phase_space_max": 1.0,
             "phase_space_filter": "all",
         },
         "phase space plugin configuration"
     )
 
     output_configuration.addToCustomInput(
-        {"opnePMD_period": 100, "opnePMD_file": "simData", "opnePMD_extension": "bp"}, "openPMD plugin configuration"
+        {"openPMD_period": 100, "openPMD_file": "simData", "openPMD_extension": "bp"}, "openPMD plugin configuration"
     )
 
     output_configuration.addToCustomInput(
